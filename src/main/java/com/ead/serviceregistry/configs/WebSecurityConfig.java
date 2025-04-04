@@ -40,10 +40,11 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
+                .httpBasic(httpBasic -> {
+                })
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
-                .formLogin(form -> form.defaultSuccessUrl("/", true))
-                .logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login"));
+                .formLogin(form -> form.defaultSuccessUrl("/", true));
 
         return http.build();
     }
